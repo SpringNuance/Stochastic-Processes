@@ -1,0 +1,22 @@
+(* Lecture 6 examples, Mathematica code.
+   This shows how you can manipulate polynomials on a computer.
+
+   You can try on your own (type or copypaste to Mathematica).
+   The Out lines show what Mathematica should be outputting. *)
+
+(* Set up child distribution (from one individual *)
+phi[s_] := 0.9 +0.1*s^3
+
+(* From i=2 individuals, probabilities of j children in next generation *)
+phi[s]^2
+  Out[2]= (0.9 +0.1 s^3)^2
+Expand[%]
+  Out[3]= 0.81 +0.18 s^3+0.01 s^6
+
+(* From 1 individual, probabilities of j grandchildren *)
+phiphi[s_] := phi[phi[s]]
+phiphi[s]
+  Out[5]= 0.9 +0.1 (0.9 +0.1 s^3)^3
+Expand[%]
+  Out[6]= 0.9729 +0.0243 s^3+0.0027 s^6+0.0001 s^9
+
