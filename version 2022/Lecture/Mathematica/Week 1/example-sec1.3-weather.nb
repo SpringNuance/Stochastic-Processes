@@ -1,0 +1,628 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     21658,        620]
+NotebookOptionsPosition[     17398,        527]
+NotebookOutlinePosition[     17796,        543]
+CellTagsIndexPosition[     17753,        540]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Example 1.6: Weather (Section 1.3) ", "Section",
+ CellChangeTimes->{{3.875523100538546*^9, 3.875523111508045*^9}, {
+  3.875523283777519*^9, 3.8755232876225967`*^9}, {3.87552357760231*^9, 
+  3.8755235783510942`*^9}, {3.875524144705378*^9, 3.875524146331258*^9}, {
+  3.875525138848674*^9, 
+  3.8755251584387627`*^9}},ExpressionUUID->"37ab6e77-3ef4-4beb-b3cb-\
+189094bc1724"],
+
+Cell[CellGroupData[{
+
+Cell["Transition matrix", "Subsection",
+ CellChangeTimes->{
+  3.87552329278465*^9, {3.875524592784053*^9, 
+   3.875524592863068*^9}},ExpressionUUID->"dcd0fc8b-5638-4553-8df7-\
+55dca0b0995a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P", ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.8", ",", "0.2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.5", ",", "0.5"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"P", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523184118668*^9, 3.8755231878826838`*^9}, {
+   3.875523359961742*^9, 3.8755233601628923`*^9}, 3.8755234807119207`*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"dc55b456-ad50-44ad-8ce0-d11daefb9f7e"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.8`", "0.2`"},
+     {"0.5`", "0.5`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233604637957`*^9, 3.87552348296843*^9, 3.875524228879566*^9, {
+   3.8755246460232973`*^9, 3.875524678388699*^9}, 3.875527148676937*^9, 
+   3.875706727327511*^9},
+ CellLabel->
+  "Out[2]//MatrixForm=",ExpressionUUID->"0c75f315-6c0a-4c1f-9812-\
+f8a134592749"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Find predictions for future\[CloseCurlyQuote]s weather", "Section",
+ CellChangeTimes->{{3.875524569392313*^9, 
+  3.875524586264881*^9}},ExpressionUUID->"4d5bea38-35e1-43be-ab55-\
+c41e559a5cb0"],
+
+Cell[CellGroupData[{
+
+Cell["Initial distribution: on Monday it\[CloseCurlyQuote]s cloudy", \
+"Subsection",
+ CellChangeTimes->{{3.8755233102104263`*^9, 
+  3.875523325371764*^9}},ExpressionUUID->"1d265327-56b6-4eee-920f-\
+6ed03e4ade54"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mu0", ":=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"mu0", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523333481289*^9, 3.875523375100396*^9}, {
+   3.8755234352567387`*^9, 3.8755234367379208`*^9}, 3.875523481867544*^9},
+ CellLabel->"In[3]:=",ExpressionUUID->"67566e21-41c1-4728-844d-ddcb36cdb403"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233758269663`*^9, 3.8755234370929327`*^9, 3.8755234846055183`*^9, 
+   3.8755238058180923`*^9, 3.875524228981031*^9, {3.8755246460621843`*^9, 
+   3.875524678433546*^9}, 3.875527148726285*^9, 3.8757067274907207`*^9},
+ CellLabel->
+  "Out[4]//MatrixForm=",ExpressionUUID->"121d82ac-db93-491e-9c74-\
+b41ccc978d0b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predict Tuesday\[CloseCurlyQuote]s weather (1 day ahead)", "Subsection",
+ CellChangeTimes->{{3.875523451732164*^9, 3.875523462250094*^9}, {
+  3.875523785745418*^9, 
+  3.875523788622723*^9}},ExpressionUUID->"42d8127e-dd2e-4672-93ae-\
+b00a1fdec820"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mu1", " ", ":=", " ", 
+   RowBox[{"mu0", " ", ".", " ", "P"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"mu1", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.87552347762134*^9, 3.875523491326309*^9}, {
+  3.875523559565895*^9, 3.8755235600709753`*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"d917c4a8-ff15-409b-8c88-02f48e671893"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.8`", "0.2`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.875523491854437*^9, 3.875523560637636*^9, 3.875523807291402*^9, 
+   3.875524228989447*^9, {3.875524646071134*^9, 3.875524678444124*^9}, 
+   3.8755271487403183`*^9, 3.875706727515872*^9},
+ CellLabel->
+  "Out[6]//MatrixForm=",ExpressionUUID->"6c92efb7-e8b2-4049-a42e-\
+91fa923c529d"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predict Wednesday\[CloseCurlyQuote]s weather (2 days ahead)", \
+"Subsection",
+ CellChangeTimes->{{3.875523768469192*^9, 
+  3.875523782944996*^9}},ExpressionUUID->"31b44d26-2b27-41c3-b072-\
+40095a6ed10e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mu2", " ", ":=", " ", 
+   RowBox[{"mu0", " ", ".", " ", "P", ".", "P"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"mu2", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523794889398*^9, 3.875523800914556*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"231f21f5-20db-4d33-9c69-cdc0edd36efc"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.7400000000000001`", "0.26`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.875523801851177*^9, 3.875523808721415*^9}, 
+   3.8755242290124207`*^9, {3.875524646089882*^9, 3.8755246784676743`*^9}, 
+   3.875527148768882*^9, 3.8757067275279703`*^9},
+ CellLabel->
+  "Out[8]//MatrixForm=",ExpressionUUID->"69d493fd-aac7-4719-9bf4-\
+1e35aaa6cc4e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predict Saturday\[CloseCurlyQuote]s weather (5 days ahead)", \
+"Subsection",
+ CellChangeTimes->{{3.875523825594142*^9, 
+  3.8755238363575087`*^9}},ExpressionUUID->"a7ca97c9-6bd4-477f-b262-\
+fa8d82ce9011"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mu5", " ", ":=", " ", 
+   RowBox[{"mu0", " ", ".", " ", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "5"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"mu5", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.8755238414872627`*^9, 3.875523847616559*^9}, {
+  3.875523888355938*^9, 3.875523908213455*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"86403bd2-5921-48e5-8432-a391283ba9c6"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.7149800000000003`", "0.28502000000000005`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.875523847926897*^9, 3.875523908534869*^9, 3.875524229022604*^9, {
+   3.875524646100327*^9, 3.8755246784795513`*^9}, 3.875527148783256*^9, 
+   3.8757067275556593`*^9},
+ CellLabel->
+  "Out[10]//MatrixForm=",ExpressionUUID->"cb504ee1-c780-4c32-adf6-\
+bcf933f99b86"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Take unknown initial distribution", "Section",
+ CellChangeTimes->{{3.875524259993238*^9, 
+  3.875524297397374*^9}},ExpressionUUID->"c41f5e22-1e19-49bc-a0ce-\
+31c322f6e6bd"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Random initial distribution: on Monday it\[CloseCurlyQuote]s cloudy/sunny \
+with 50/50 chance\
+\>", "Subsection",
+ CellChangeTimes->{{3.875523412179641*^9, 3.875523427946392*^9}, {
+  3.8755243622973013`*^9, 
+  3.875524362663537*^9}},ExpressionUUID->"d367c20a-4c13-43b2-85c3-\
+b598ec0fb421"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"nu0", ":=", 
+  RowBox[{"{", 
+   RowBox[{"{", 
+    RowBox[{"0.5", ",", "0.5"}], "}"}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"nu0", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875524613770132*^9, 3.875524614768621*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"584c00aa-c136-4b36-9d3b-761354152822"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.5`", "0.5`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.87552343197716*^9, 3.8755236164184837`*^9, 3.875524229051509*^9, 
+   3.875524324962264*^9, 3.875524396137562*^9, 3.87552461508849*^9, {
+   3.87552464611728*^9, 3.87552467850322*^9}, 3.875527148808692*^9, 
+   3.8757067275660887`*^9},
+ CellLabel->
+  "Out[12]//MatrixForm=",ExpressionUUID->"8252034c-9cdf-4eef-a480-\
+d882d33c00fa"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predict Tuesday\[CloseCurlyQuote]s weather (1 day ahead)", "Subsection",
+ CellChangeTimes->{{3.875523451732164*^9, 3.875523462250094*^9}, {
+  3.875523785745418*^9, 
+  3.875523788622723*^9}},ExpressionUUID->"aa63ddc3-192f-4d5a-9b2e-\
+d45abb603a4b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"nu1", " ", ":=", " ", 
+   RowBox[{"nu0", " ", ".", " ", "P"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"nu1", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.87552347762134*^9, 3.875523491326309*^9}, {
+  3.875523559565895*^9, 3.8755235600709753`*^9}, {3.875524617751522*^9, 
+  3.8755246181773033`*^9}, {3.8755246692095537`*^9, 3.875524669390418*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"cdb97e83-bf5f-4edf-bfc4-899d66a46057"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.65`", "0.35`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.875523491854437*^9, 3.875523560637636*^9, 3.875523807291402*^9, 
+   3.875524228989447*^9, 3.8755243260370817`*^9, 3.875524397806184*^9, {
+   3.875524646127557*^9, 3.875524678514435*^9}, 3.87552714882206*^9, 
+   3.875706727594079*^9},
+ CellLabel->
+  "Out[14]//MatrixForm=",ExpressionUUID->"96438253-0e7c-4ca2-98ef-\
+336714495e2b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predict Wednesday\[CloseCurlyQuote]s weather (2 days ahead)", \
+"Subsection",
+ CellChangeTimes->{{3.875523768469192*^9, 
+  3.875523782944996*^9}},ExpressionUUID->"d2156068-073e-4d21-8abc-\
+cdcd01faf3cf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"nu2", " ", ":=", " ", 
+   RowBox[{"nu0", " ", ".", " ", "P", ".", "P"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"nu2", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523794889398*^9, 3.875523800914556*^9}, {
+  3.875524619632243*^9, 3.875524620202182*^9}, {3.8755246673688183`*^9, 
+  3.875524667474408*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"0bdbffe7-660a-4878-9d9a-4fe51c6566b5"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.6950000000000001`", "0.305`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.875523801851177*^9, 3.875523808721415*^9}, 
+   3.8755242290124207`*^9, 3.875524327600629*^9, 3.875524399932024*^9, {
+   3.8755246461459293`*^9, 3.875524678538762*^9}, 3.8755271488421392`*^9, 
+   3.8757067276063643`*^9},
+ CellLabel->
+  "Out[16]//MatrixForm=",ExpressionUUID->"b2263bba-cbbf-4172-bf02-\
+717134bdb276"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Predict Saturday\[CloseCurlyQuote]s weather (5 days ahead)", \
+"Subsection",
+ CellChangeTimes->{{3.875523825594142*^9, 
+  3.8755238363575087`*^9}},ExpressionUUID->"e74718ae-df82-49b6-b939-\
+7b0ebc4f2c3d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"nu5", " ", ":=", " ", 
+   RowBox[{"nu0", " ", ".", " ", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "5"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"nu5", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.8755238414872627`*^9, 3.875523847616559*^9}, {
+  3.875523888355938*^9, 3.875523908213455*^9}, {3.875524622611833*^9, 
+  3.875524623208281*^9}, {3.875524664998868*^9, 3.8755246650734253`*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"b4ff3975-7c82-47d6-9e70-873c00b7db69"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.7137650000000002`", "0.286235`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.875523847926897*^9, 3.875523908534869*^9, 3.875524229022604*^9, 
+   3.8755243294620657`*^9, 3.875524402879674*^9, {3.8755246461544733`*^9, 
+   3.8755246785497293`*^9}, 3.875527148856531*^9, 3.875706727632338*^9},
+ CellLabel->
+  "Out[18]//MatrixForm=",ExpressionUUID->"73e5cf7c-8954-49e7-bb2a-\
+308e9033f182"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+It seems that, in the long run, the initial distribution didn\
+\[CloseCurlyQuote]t matter much! (Cf. Lecture 2)\
+\>", "Section",
+ CellChangeTimes->{{3.875524440905856*^9, 3.875524461238409*^9}, {
+  3.875524554842121*^9, 3.875524558618835*^9}, {3.875524718901684*^9, 
+  3.875524721331728*^9}},ExpressionUUID->"44654c67-c340-4b8e-b893-\
+74e026aed2bf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"mu5", "//", "MatrixForm"}], "\[IndentingNewLine]", 
+ RowBox[{"nu5", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875524628664793*^9, 3.8755246377370577`*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"f885b789-12f2-4e41-9797-0730e8e1def7"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.7149800000000003`", "0.28502000000000005`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.875524646176429*^9, 3.875524678575931*^9}, 
+   3.875527148876955*^9, 3.875706727646943*^9},
+ CellLabel->
+  "Out[19]//MatrixForm=",ExpressionUUID->"320779bc-5960-4b0f-985b-\
+d8f52aa9fd71"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.7137650000000002`", "0.286235`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.875524646176429*^9, 3.875524678575931*^9}, 
+   3.875527148876955*^9, 3.875706727648678*^9},
+ CellLabel->
+  "Out[20]//MatrixForm=",ExpressionUUID->"b7e2bd5e-8dae-4611-ac2c-\
+1e8c78098cb8"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 623},
+WindowMargins->{{Automatic, -1830}, {Automatic, -189}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ce4b0fff-7231-413c-9f30-6f4819cbb986"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 378, 6, 67, "Section",ExpressionUUID->"37ab6e77-3ef4-4beb-b3cb-189094bc1724"],
+Cell[CellGroupData[{
+Cell[983, 32, 190, 4, 54, "Subsection",ExpressionUUID->"dcd0fc8b-5638-4553-8df7-55dca0b0995a"],
+Cell[CellGroupData[{
+Cell[1198, 40, 518, 13, 52, "Input",ExpressionUUID->"dc55b456-ad50-44ad-8ce0-d11daefb9f7e"],
+Cell[1719, 55, 779, 22, 60, "Output",ExpressionUUID->"0c75f315-6c0a-4c1f-9812-f8a134592749"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2559, 84, 199, 3, 67, "Section",ExpressionUUID->"4d5bea38-35e1-43be-ab55-c41e559a5cb0"],
+Cell[CellGroupData[{
+Cell[2783, 91, 212, 4, 54, "Subsection",ExpressionUUID->"1d265327-56b6-4eee-920f-6ed03e4ade54"],
+Cell[CellGroupData[{
+Cell[3020, 99, 429, 9, 52, "Input",ExpressionUUID->"67566e21-41c1-4728-844d-ddcb36cdb403"],
+Cell[3452, 110, 803, 21, 45, "Output",ExpressionUUID->"121d82ac-db93-491e-9c74-b41ccc978d0b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4304, 137, 253, 4, 54, "Subsection",ExpressionUUID->"42d8127e-dd2e-4672-93ae-b00a1fdec820"],
+Cell[CellGroupData[{
+Cell[4582, 145, 374, 7, 52, "Input",ExpressionUUID->"d917c4a8-ff15-409b-8c88-02f48e671893"],
+Cell[4959, 154, 777, 21, 45, "Output",ExpressionUUID->"6c92efb7-e8b2-4049-a42e-91fa923c529d"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5785, 181, 209, 4, 54, "Subsection",ExpressionUUID->"31b44d26-2b27-41c3-b072-40095a6ed10e"],
+Cell[CellGroupData[{
+Cell[6019, 189, 337, 7, 52, "Input",ExpressionUUID->"231f21f5-20db-4d33-9c69-cdc0edd36efc"],
+Cell[6359, 198, 774, 20, 45, "Output",ExpressionUUID->"69d493fd-aac7-4719-9bf4-1e35aaa6cc4e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7182, 224, 210, 4, 54, "Subsection",ExpressionUUID->"a7ca97c9-6bd4-477f-b262-fa8d82ce9011"],
+Cell[CellGroupData[{
+Cell[7417, 232, 441, 9, 52, "Input",ExpressionUUID->"86403bd2-5921-48e5-8432-a391283ba9c6"],
+Cell[7861, 243, 789, 21, 45, "Output",ExpressionUUID->"cb504ee1-c780-4c32-adf6-bcf933f99b86"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8711, 271, 178, 3, 67, "Section",ExpressionUUID->"c41f5e22-1e19-49bc-a0ce-31c322f6e6bd"],
+Cell[CellGroupData[{
+Cell[8914, 278, 300, 7, 54, "Subsection",ExpressionUUID->"d367c20a-4c13-43b2-85c3-b598ec0fb421"],
+Cell[CellGroupData[{
+Cell[9239, 289, 337, 7, 52, "Input",ExpressionUUID->"584c00aa-c136-4b36-9d3b-761354152822"],
+Cell[9579, 298, 824, 22, 45, "Output",ExpressionUUID->"8252034c-9cdf-4eef-a480-d882d33c00fa"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10452, 326, 253, 4, 54, "Subsection",ExpressionUUID->"aa63ddc3-192f-4d5a-9b2e-d45abb603a4b"],
+Cell[CellGroupData[{
+Cell[10730, 334, 474, 8, 52, "Input",ExpressionUUID->"cdb97e83-bf5f-4edf-bfc4-899d66a46057"],
+Cell[11207, 344, 827, 22, 45, "Output",ExpressionUUID->"96438253-0e7c-4ca2-98ef-336714495e2b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12083, 372, 209, 4, 54, "Subsection",ExpressionUUID->"d2156068-073e-4d21-8abc-cdcd01faf3cf"],
+Cell[CellGroupData[{
+Cell[12317, 380, 438, 9, 52, "Input",ExpressionUUID->"0bdbffe7-660a-4878-9d9a-4fe51c6566b5"],
+Cell[12758, 391, 826, 21, 45, "Output",ExpressionUUID->"b2263bba-cbbf-4172-bf02-717134bdb276"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13633, 418, 210, 4, 54, "Subsection",ExpressionUUID->"e74718ae-df82-49b6-b939-7b0ebc4f2c3d"],
+Cell[CellGroupData[{
+Cell[13868, 426, 539, 10, 52, "Input",ExpressionUUID->"b4ff3975-7c82-47d6-9e70-873c00b7db69"],
+Cell[14410, 438, 824, 21, 45, "Output",ExpressionUUID->"73e5cf7c-8954-49e7-bb2a-308e9033f182"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15295, 466, 359, 7, 105, "Section",ExpressionUUID->"44654c67-c340-4b8e-b893-74e026aed2bf"],
+Cell[CellGroupData[{
+Cell[15679, 477, 272, 4, 52, "Input",ExpressionUUID->"f885b789-12f2-4e41-9797-0730e8e1def7"],
+Cell[15954, 483, 712, 19, 45, "Output",ExpressionUUID->"320779bc-5960-4b0f-985b-d8f52aa9fd71"],
+Cell[16669, 504, 701, 19, 34, "Output",ExpressionUUID->"b7e2bd5e-8dae-4611-ac2c-1e8c78098cb8"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

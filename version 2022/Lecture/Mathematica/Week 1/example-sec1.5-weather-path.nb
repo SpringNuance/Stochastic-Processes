@@ -1,0 +1,531 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20620,        523]
+NotebookOptionsPosition[     16692,        440]
+NotebookOutlinePosition[     17090,        456]
+CellTagsIndexPosition[     17047,        453]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Example: Weather path probabilities (Section 1.5)", "Section",
+ CellChangeTimes->{{3.875523100538546*^9, 3.875523111508045*^9}, {
+  3.875523283777519*^9, 3.8755232876225967`*^9}, {3.87552357760231*^9, 
+  3.8755235783510942`*^9}, {3.875524144705378*^9, 3.875524146331258*^9}, {
+  3.8755248897208443`*^9, 3.8755248897830763`*^9}, {3.875525116809031*^9, 
+  3.8755251353824*^9}, {3.875525200626256*^9, 
+  3.875525200720768*^9}},ExpressionUUID->"70cdca6e-fb5b-4874-9808-\
+c149038a6726"],
+
+Cell[CellGroupData[{
+
+Cell["Transition matrix", "Subsection",
+ CellChangeTimes->{
+  3.87552329278465*^9, {3.875524592784053*^9, 
+   3.875524592863068*^9}},ExpressionUUID->"2ee60c17-831b-4f4b-9e82-\
+a1a2b11bf360"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P", ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.8", ",", "0.2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.5", ",", "0.5"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"P", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523184118668*^9, 3.8755231878826838`*^9}, {
+   3.875523359961742*^9, 3.8755233601628923`*^9}, 3.8755234807119207`*^9},
+ CellLabel->"In[21]:=",ExpressionUUID->"fb515225-3002-44d9-ac05-4b80a5157125"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.8`", "0.2`"},
+     {"0.5`", "0.5`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233604637957`*^9, 3.87552348296843*^9, 3.875524228879566*^9, {
+   3.8755246460232973`*^9, 3.875524678388699*^9}, 3.875525550721942*^9, 
+   3.875526128059669*^9, 3.875526182620129*^9, 3.875527137077217*^9, 
+   3.875529846790968*^9, 3.875529950681774*^9, 3.87570672775253*^9},
+ CellLabel->
+  "Out[22]//MatrixForm=",ExpressionUUID->"8d677f3c-5671-479a-ad15-\
+a4ab607726b5"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Find predictions for future\[CloseCurlyQuote]s weather: sunny all the \
+time?", "Section",
+ CellChangeTimes->{{3.875524569392313*^9, 3.875524586264881*^9}, {
+  3.875525857725542*^9, 3.875525858711396*^9}, {3.875526445974186*^9, 
+  3.875526447323875*^9}},ExpressionUUID->"669cd28a-af87-4324-8b90-\
+95bf323cb5fc"],
+
+Cell[CellGroupData[{
+
+Cell["Initial distribution: on Monday it\[CloseCurlyQuote]s sunny", \
+"Subsection",
+ CellChangeTimes->{{3.8755233102104263`*^9, 3.875523325371764*^9}, {
+  3.8755253335344477`*^9, 
+  3.8755253342283297`*^9}},ExpressionUUID->"391af48c-f46a-406e-ab04-\
+66b931383d5d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mu0", ":=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1"}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"mu0", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523333481289*^9, 3.875523375100396*^9}, {
+   3.8755234352567387`*^9, 3.8755234367379208`*^9}, 3.875523481867544*^9, {
+   3.875525336860127*^9, 3.875525338281324*^9}, {3.875526150339213*^9, 
+   3.87552615053398*^9}},
+ CellLabel->"In[23]:=",ExpressionUUID->"f6c73a2b-ed6a-4620-b53c-c101797355c7"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233758269663`*^9, 3.8755234370929327`*^9, 3.8755234846055183`*^9, 
+   3.8755238058180923`*^9, 3.875524228981031*^9, {3.8755246460621843`*^9, 
+   3.875524678433546*^9}, 3.875525338485428*^9, 3.8755255507713337`*^9, 
+   3.875526128148643*^9, 3.875526182655217*^9, 3.875527137126758*^9, 
+   3.875529785273243*^9, 3.8755298468488007`*^9, 3.8755299507607527`*^9, 
+   3.875706727781578*^9},
+ CellLabel->
+  "Out[24]//MatrixForm=",ExpressionUUID->"8c78e777-b865-4dea-9f45-\
+0f9dd3fc8a29"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Probability that also on Tuesday-Thursday it\[CloseCurlyQuote]s sunny every \
+day (3 days)\
+\>", "Subsection",
+ CellChangeTimes->{{3.875523451732164*^9, 3.875523462250094*^9}, {
+   3.875523785745418*^9, 3.875523788622723*^9}, {3.8755252952104177`*^9, 
+   3.875525354886902*^9}, 3.875525547907876*^9, {3.875525922439651*^9, 
+   3.875525922907875*^9}},ExpressionUUID->"de744528-194e-49eb-937d-\
+283ec0e50fa1"],
+
+Cell["Matrix element P(2,2) (from sunny to sunny):", "Text",
+ CellChangeTimes->{{3.875525525191288*^9, 3.8755255259047213`*^9}, {
+  3.87552596821059*^9, 
+  3.87552597414701*^9}},ExpressionUUID->"7560db07-ecca-46b0-8c24-\
+cb4026049d9a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p22", " ", ":=", " ", 
+    RowBox[{"P", "[", 
+     RowBox[{"[", 
+      RowBox[{"2", ",", "2"}], "]"}], "]"}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.87552347762134*^9, 3.875523491326309*^9}, {
+  3.875523559565895*^9, 3.8755235600709753`*^9}, {3.875525460810957*^9, 
+  3.875525518201661*^9}, {3.875525569267288*^9, 3.875525569919613*^9}, {
+  3.87552990958753*^9, 3.875529914207621*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"4451b8dd-429b-4715-bcd4-d137988c3e5d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mu0", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "2"}], "]"}], "]"}], "*", "p22", "*", "p22", "*", 
+  "p22"}]], "Input",
+ CellChangeTimes->{{3.8755255314087343`*^9, 3.8755255320654287`*^9}, {
+   3.875525574117845*^9, 3.875525602498958*^9}, {3.875525778572772*^9, 
+   3.875525788830594*^9}, 3.875526162409384*^9, 3.875526228824759*^9, {
+   3.875529833425008*^9, 3.8755298548712463`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"67c5412e-7c9b-42f9-9ed3-82c9089d31cb"],
+
+Cell[BoxData["0.125`"], "Output",
+ CellChangeTimes->{{3.875525532392083*^9, 3.875525602766741*^9}, {
+   3.8755257801094418`*^9, 3.875525789977901*^9}, 3.875526128203582*^9, 
+   3.8755261827205753`*^9, 3.875526230088279*^9, 3.8755271371697063`*^9, {
+   3.8755298468911667`*^9, 3.875529858653623*^9}, 3.8755299181326523`*^9, 
+   3.875529950799445*^9, 3.8757067278151627`*^9},
+ CellLabel->"Out[26]=",ExpressionUUID->"14cee06f-1e9d-4685-ab19-ddeda24c18e6"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Probability that after Monday it\[CloseCurlyQuote]s also sunny every day for \
+14 days\
+\>", "Subsection",
+ CellChangeTimes->{{3.875523451732164*^9, 3.875523462250094*^9}, {
+   3.875523785745418*^9, 3.875523788622723*^9}, {3.8755252952104177`*^9, 
+   3.875525354886902*^9}, 3.875525547907876*^9, {3.875525825063961*^9, 
+   3.875525839162262*^9}, {3.875525927021888*^9, 
+   3.875525927318659*^9}},ExpressionUUID->"99d990f1-879a-4ee5-9393-\
+9a5943312d30"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mu0", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "2"}], "]"}], "]"}], "*", 
+  RowBox[{"p22", "^", "14"}]}]], "Input",
+ CellChangeTimes->{{3.8755255314087343`*^9, 3.8755255320654287`*^9}, {
+   3.875525574117845*^9, 3.875525602498958*^9}, {3.875525778572772*^9, 
+   3.875525788830594*^9}, {3.8755258481435003`*^9, 3.8755258490484858`*^9}, 
+   3.875526164451689*^9, 3.875526232033903*^9, 3.875529866062155*^9},
+ CellLabel->"In[27]:=",ExpressionUUID->"23c41eef-5dc3-4490-acd4-bd637638456a"],
+
+Cell[BoxData["0.00006103515625`"], "Output",
+ CellChangeTimes->{{3.875525532392083*^9, 3.875525602766741*^9}, {
+   3.8755257801094418`*^9, 3.875525789977901*^9}, 3.875525850080003*^9, 
+   3.8755261282349358`*^9, 3.875526182732552*^9, 3.875526232665*^9, 
+   3.8755271371915627`*^9, {3.875529846908927*^9, 3.8755298667510633`*^9}, 
+   3.875529950814867*^9, 3.875706727828212*^9},
+ CellLabel->"Out[27]=",ExpressionUUID->"49e02cfd-99ef-4fb2-aae9-f12bb93f079d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Find predictions for future\[CloseCurlyQuote]s weather: cloudy all the \
+time?", "Section",
+ CellChangeTimes->{{3.875524569392313*^9, 3.875524586264881*^9}, {
+   3.875525857725542*^9, 3.875525864912022*^9}, 
+   3.875526451889998*^9},ExpressionUUID->"6309e71b-a765-4ba8-84e9-\
+75b83bcfe555"],
+
+Cell[CellGroupData[{
+
+Cell["Initial distribution: on Monday it\[CloseCurlyQuote]s cloudy", \
+"Subsection",
+ CellChangeTimes->{{3.8755233102104263`*^9, 3.875523325371764*^9}, {
+  3.8755253335344477`*^9, 3.8755253342283297`*^9}, {3.875525871932144*^9, 
+  3.875525873030705*^9}},ExpressionUUID->"4cf13f80-2719-4c30-ad36-\
+210a97693451"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"nu0", ":=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"nu0", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523333481289*^9, 3.875523375100396*^9}, {
+   3.8755234352567387`*^9, 3.8755234367379208`*^9}, 3.875523481867544*^9, {
+   3.875525336860127*^9, 3.875525338281324*^9}, {3.875525875631225*^9, 
+   3.875525881497332*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"9fbae3fa-13e9-4ee8-a494-b37218e3ac35"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233758269663`*^9, 3.8755234370929327`*^9, 3.8755234846055183`*^9, 
+   3.8755238058180923`*^9, 3.875524228981031*^9, {3.8755246460621843`*^9, 
+   3.875524678433546*^9}, 3.875525338485428*^9, 3.8755255507713337`*^9, {
+   3.8755258819683313`*^9, 3.87552589603087*^9}, 3.875526128247838*^9, 
+   3.875526182754846*^9, 3.875527137202506*^9, 3.8755298469363403`*^9, 
+   3.8755299508384943`*^9, 3.875706727854875*^9},
+ CellLabel->
+  "Out[29]//MatrixForm=",ExpressionUUID->"b5d9a1d6-a0ad-4592-932d-\
+a51b93c624f2"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Probability that also on Tuesday-Thursday it\[CloseCurlyQuote]s cloudy every \
+day (3 days)\
+\>", "Subsection",
+ CellChangeTimes->{{3.875523451732164*^9, 3.875523462250094*^9}, {
+   3.875523785745418*^9, 3.875523788622723*^9}, {3.8755252952104177`*^9, 
+   3.875525354886902*^9}, 3.875525547907876*^9, {3.875525914449978*^9, 
+   3.87552593208749*^9}},ExpressionUUID->"3691dfe0-f097-4e7e-8d07-\
+7742df5354c5"],
+
+Cell["Matrix element P(1,1) (from cloudy to cloudy):", "Text",
+ CellChangeTimes->{{3.875525525191288*^9, 3.8755255259047213`*^9}, {
+  3.875525941270767*^9, 
+  3.875525953184325*^9}},ExpressionUUID->"676342f5-3ce0-4fe5-88b8-\
+b3106ff21391"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p11", " ", ":=", " ", 
+    RowBox[{"P", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.87552347762134*^9, 3.875523491326309*^9}, {
+  3.875523559565895*^9, 3.8755235600709753`*^9}, {3.875525460810957*^9, 
+  3.875525518201661*^9}, {3.875525569267288*^9, 3.875525569919613*^9}, {
+  3.8755259565703287`*^9, 3.875525959454624*^9}, {3.875529977133512*^9, 
+  3.8755299798275843`*^9}},
+ CellLabel->"In[30]:=",ExpressionUUID->"6d1c62e8-c04a-4a5c-92b6-ef6da5b49946"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nu0", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1"}], "]"}], "]"}], "*", "p11", "*", "p11", "*", 
+  "p11"}]], "Input",
+ CellChangeTimes->{{3.8755255314087343`*^9, 3.8755255320654287`*^9}, {
+   3.875525574117845*^9, 3.875525602498958*^9}, {3.875525778572772*^9, 
+   3.875525788830594*^9}, {3.8755259963529*^9, 3.875526026214478*^9}, 
+   3.8755261716337433`*^9, 3.87552625732975*^9, {3.8755298741778173`*^9, 
+   3.875529877414935*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"1f1111a3-b03f-4546-8ccf-0155db4525c9"],
+
+Cell[BoxData["0.5120000000000001`"], "Output",
+ CellChangeTimes->{{3.875525532392083*^9, 3.875525602766741*^9}, {
+   3.8755257801094418`*^9, 3.875525789977901*^9}, {3.8755260017908373`*^9, 
+   3.875526052664332*^9}, 3.875526128322404*^9, 3.875526182839497*^9, 
+   3.8755262581094103`*^9, 3.8755271372572203`*^9, 3.8755298469951763`*^9, 
+   3.875529880049111*^9, 3.875529950874942*^9, 3.8755299822143097`*^9, 
+   3.875706728265683*^9},
+ CellLabel->"Out[31]=",ExpressionUUID->"87441836-2d53-4e68-9c18-8c79dd1b2432"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Probability that after Monday it\[CloseCurlyQuote]s also cloudy every day for \
+14 days\
+\>", "Subsection",
+ CellChangeTimes->{{3.875523451732164*^9, 3.875523462250094*^9}, {
+   3.875523785745418*^9, 3.875523788622723*^9}, {3.8755252952104177`*^9, 
+   3.875525354886902*^9}, 3.875525547907876*^9, {3.875525825063961*^9, 
+   3.875525839162262*^9}, {3.875525927021888*^9, 3.875525927318659*^9}, 
+   3.8755260204789248`*^9},ExpressionUUID->"c8b1eabf-e1f1-4675-86ff-\
+1ad47dfb7f85"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nu0", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1"}], "]"}], "]"}], "*", 
+  RowBox[{"p11", "^", "14"}]}]], "Input",
+ CellChangeTimes->{{3.8755255314087343`*^9, 3.8755255320654287`*^9}, {
+   3.875525574117845*^9, 3.875525602498958*^9}, {3.875525778572772*^9, 
+   3.875525788830594*^9}, {3.8755258481435003`*^9, 3.8755258490484858`*^9}, {
+   3.8755260571782837`*^9, 3.8755260596373577`*^9}, 3.875526173548911*^9, 
+   3.875526260236968*^9, 3.875529885558402*^9},
+ CellLabel->"In[32]:=",ExpressionUUID->"23608528-7084-4506-b0d1-529f9cba7d60"],
+
+Cell[BoxData["0.04398046511104004`"], "Output",
+ CellChangeTimes->{{3.875525532392083*^9, 3.875525602766741*^9}, {
+   3.8755257801094418`*^9, 3.875525789977901*^9}, 3.875525850080003*^9, 
+   3.8755260603868513`*^9, 3.875526128332939*^9, 3.87552618285072*^9, 
+   3.87552626078036*^9, 3.875527137267473*^9, 3.8755298470201*^9, 
+   3.875529886698694*^9, 3.875529950892124*^9, 3.875706728280161*^9},
+ CellLabel->"Out[32]=",ExpressionUUID->"d78720b9-f630-4836-941a-57907bef12bd"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Paths all sunny / all cloudy aren\[CloseCurlyQuote]t the same.", \
+"Section",
+ CellChangeTimes->{{3.875524440905856*^9, 3.875524461238409*^9}, {
+  3.875524554842121*^9, 3.875524558618835*^9}, {3.875524718901684*^9, 
+  3.875524721331728*^9}, {3.875526092803495*^9, 
+  3.875526111911578*^9}},ExpressionUUID->"e203fbbc-56a7-4bbf-a4d5-\
+eca6c48ca15d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mu0", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "2"}], "]"}], "]"}], "*", 
+  RowBox[{"p22", "^", "14"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nu0", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1"}], "]"}], "]"}], "*", 
+  RowBox[{"p11", "^", "14"}]}]}], "Input",
+ CellChangeTimes->{{3.875526116146372*^9, 3.8755261236705647`*^9}, {
+  3.875526177282878*^9, 3.87552617971451*^9}, {3.875526262874826*^9, 
+  3.8755262678466988`*^9}, {3.875529891580573*^9, 3.875529895659936*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"118540f9-b6d5-4e68-982f-3d7f3b3f3c7d"],
+
+Cell[BoxData["0.00006103515625`"], "Output",
+ CellChangeTimes->{{3.875526124067794*^9, 3.8755261283741493`*^9}, 
+   3.8755261828781548`*^9, 3.875526268011451*^9, 3.8755271372912903`*^9, 
+   3.875529847040103*^9, 3.875529897346929*^9, 3.87552995091501*^9, 
+   3.875706728300683*^9},
+ CellLabel->"Out[33]=",ExpressionUUID->"8671acf2-6dec-4f6a-af26-cc96d117953e"],
+
+Cell[BoxData["0.04398046511104004`"], "Output",
+ CellChangeTimes->{{3.875526124067794*^9, 3.8755261283741493`*^9}, 
+   3.8755261828781548`*^9, 3.875526268011451*^9, 3.8755271372912903`*^9, 
+   3.875529847040103*^9, 3.875529897346929*^9, 3.87552995091501*^9, 
+   3.8757067283022223`*^9},
+ CellLabel->"Out[34]=",ExpressionUUID->"faa1e61c-d50c-4dd3-b0bd-82bcd30f0ce3"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 623},
+WindowMargins->{{Automatic, -1831}, {Automatic, -191}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fcb04e2-981c-4dea-98e5-f155ffb373f0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 487, 7, 67, "Section",ExpressionUUID->"70cdca6e-fb5b-4874-9808-c149038a6726"],
+Cell[CellGroupData[{
+Cell[1092, 33, 190, 4, 54, "Subsection",ExpressionUUID->"2ee60c17-831b-4f4b-9e82-a1a2b11bf360"],
+Cell[CellGroupData[{
+Cell[1307, 41, 519, 13, 52, "Input",ExpressionUUID->"fb515225-3002-44d9-ac05-4b80a5157125"],
+Cell[1829, 56, 893, 23, 60, "Output",ExpressionUUID->"8d677f3c-5671-479a-ad15-a4ab607726b5"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2783, 86, 317, 5, 67, "Section",ExpressionUUID->"669cd28a-af87-4324-8b90-95bf323cb5fc"],
+Cell[CellGroupData[{
+Cell[3125, 95, 264, 5, 54, "Subsection",ExpressionUUID->"391af48c-f46a-406e-ab04-66b931383d5d"],
+Cell[CellGroupData[{
+Cell[3414, 104, 529, 11, 52, "Input",ExpressionUUID->"f6c73a2b-ed6a-4620-b53c-c101797355c7"],
+Cell[3946, 117, 974, 24, 45, "Output",ExpressionUUID->"8c78e777-b865-4dea-9f45-0f9dd3fc8a29"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4969, 147, 417, 8, 54, "Subsection",ExpressionUUID->"de744528-194e-49eb-937d-283ec0e50fa1"],
+Cell[5389, 157, 235, 4, 35, "Text",ExpressionUUID->"7560db07-ecca-46b0-8c24-cb4026049d9a"],
+Cell[5627, 163, 520, 11, 30, "Input",ExpressionUUID->"4451b8dd-429b-4715-bcd4-d137988c3e5d"],
+Cell[CellGroupData[{
+Cell[6172, 178, 502, 10, 30, "Input",ExpressionUUID->"67c5412e-7c9b-42f9-9ed3-82c9089d31cb"],
+Cell[6677, 190, 452, 6, 34, "Output",ExpressionUUID->"14cee06f-1e9d-4685-ab19-ddeda24c18e6"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7178, 202, 463, 9, 54, "Subsection",ExpressionUUID->"99d990f1-879a-4ee5-9393-9a5943312d30"],
+Cell[CellGroupData[{
+Cell[7666, 215, 523, 10, 30, "Input",ExpressionUUID->"23c41eef-5dc3-4490-acd4-bd637638456a"],
+Cell[8192, 227, 456, 6, 34, "Output",ExpressionUUID->"49e02cfd-99ef-4fb2-aae9-f12bb93f079d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8709, 240, 296, 5, 67, "Section",ExpressionUUID->"6309e71b-a765-4ba8-84e9-75b83bcfe555"],
+Cell[CellGroupData[{
+Cell[9030, 249, 311, 5, 54, "Subsection",ExpressionUUID->"4cf13f80-2719-4c30-ad36-210a97693451"],
+Cell[CellGroupData[{
+Cell[9366, 258, 530, 11, 52, "Input",ExpressionUUID->"9fbae3fa-13e9-4ee8-a494-b37218e3ac35"],
+Cell[9899, 271, 999, 24, 45, "Output",ExpressionUUID->"b5d9a1d6-a0ad-4592-932d-a51b93c624f2"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10947, 301, 417, 8, 54, "Subsection",ExpressionUUID->"3691dfe0-f097-4e7e-8d07-7742df5354c5"],
+Cell[11367, 311, 239, 4, 35, "Text",ExpressionUUID->"676342f5-3ce0-4fe5-88b8-b3106ff21391"],
+Cell[11609, 317, 574, 12, 30, "Input",ExpressionUUID->"6d1c62e8-c04a-4a5c-92b6-ef6da5b49946"],
+Cell[CellGroupData[{
+Cell[12208, 333, 551, 11, 30, "Input",ExpressionUUID->"1f1111a3-b03f-4546-8ccf-0155db4525c9"],
+Cell[12762, 346, 513, 7, 34, "Output",ExpressionUUID->"87441836-2d53-4e68-9c18-8c79dd1b2432"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13324, 359, 488, 9, 54, "Subsection",ExpressionUUID->"c8b1eabf-e1f1-4675-86ff-1ad47dfb7f85"],
+Cell[CellGroupData[{
+Cell[13837, 372, 577, 11, 30, "Input",ExpressionUUID->"23608528-7084-4506-b0d1-529f9cba7d60"],
+Cell[14417, 385, 474, 6, 34, "Output",ExpressionUUID->"d78720b9-f630-4836-941a-57907bef12bd"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14952, 398, 353, 6, 67, "Section",ExpressionUUID->"e203fbbc-56a7-4bbf-a4d5-eca6c48ca15d"],
+Cell[CellGroupData[{
+Cell[15330, 408, 603, 14, 52, "Input",ExpressionUUID->"118540f9-b6d5-4e68-982f-3d7f3b3f3c7d"],
+Cell[15936, 424, 360, 5, 34, "Output",ExpressionUUID->"8671acf2-6dec-4f6a-af26-cc96d117953e"],
+Cell[16299, 431, 365, 5, 34, "Output",ExpressionUUID->"faa1e61c-d50c-4dd3-b0bd-82bcd30f0ce3"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

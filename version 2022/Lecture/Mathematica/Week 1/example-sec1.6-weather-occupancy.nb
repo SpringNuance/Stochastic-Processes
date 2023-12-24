@@ -1,0 +1,366 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13572,        358]
+NotebookOptionsPosition[     11337,        306]
+NotebookOutlinePosition[     11733,        322]
+CellTagsIndexPosition[     11690,        319]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Example 1.11: Weather occupancy (Section 1.6)", "Section",
+ CellChangeTimes->{{3.875523100538546*^9, 3.875523111508045*^9}, {
+  3.875523283777519*^9, 3.8755232876225967`*^9}, {3.87552357760231*^9, 
+  3.8755235783510942`*^9}, {3.875524144705378*^9, 3.875524146331258*^9}, {
+  3.8755248897208443`*^9, 3.8755248897830763`*^9}, {3.875525116809031*^9, 
+  3.8755251353824*^9}, {3.875525200626256*^9, 3.875525200720768*^9}, {
+  3.8755263094568567`*^9, 3.8755263214385633`*^9}, {3.8755272635000477`*^9, 
+  3.8755272641805153`*^9}},ExpressionUUID->"e892b0ce-f73e-44bc-878f-\
+3fc3611d8099"],
+
+Cell[CellGroupData[{
+
+Cell["Transition matrix", "Subsection",
+ CellChangeTimes->{
+  3.87552329278465*^9, {3.875524592784053*^9, 
+   3.875524592863068*^9}},ExpressionUUID->"a40290f7-24df-4b24-8d49-\
+d1fcf8eccc51"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P", ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.8", ",", "0.2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.5", ",", "0.5"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"P", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523184118668*^9, 3.8755231878826838`*^9}, {
+   3.875523359961742*^9, 3.8755233601628923`*^9}, 3.8755234807119207`*^9},
+ CellLabel->"In[35]:=",ExpressionUUID->"ce3affc1-0367-4af8-a79f-dfe99dab0f05"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0.8`", "0.2`"},
+     {"0.5`", "0.5`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233604637957`*^9, 3.87552348296843*^9, 3.875524228879566*^9, {
+   3.8755246460232973`*^9, 3.875524678388699*^9}, 3.875525550721942*^9, 
+   3.875526128059669*^9, 3.875526182620129*^9, 3.875526474784895*^9, 
+   3.875527159469329*^9, 3.8755300026798897`*^9, 3.875706728349181*^9},
+ CellLabel->
+  "Out[36]//MatrixForm=",ExpressionUUID->"5462dfc4-5489-468e-ae12-\
+e275c3244fd9"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Occupancy matrix at day zero", "Subsection",
+ CellChangeTimes->{
+  3.87552329278465*^9, {3.875524592784053*^9, 3.875524592863068*^9}, {
+   3.875526521109454*^9, 3.875526523591463*^9}, {3.875526611368705*^9, 
+   3.875526625255546*^9}, {3.875526842015778*^9, 
+   3.875526842131837*^9}},ExpressionUUID->"785a1b11-5c25-4b9d-bd72-\
+540fd3c12021"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M0", ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"M0", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523184118668*^9, 3.8755231878826838`*^9}, {
+   3.875523359961742*^9, 3.8755233601628923`*^9}, 3.8755234807119207`*^9, {
+   3.875526627242174*^9, 3.875526646513768*^9}},
+ CellLabel->"In[37]:=",ExpressionUUID->"5751cf16-2756-4c8c-b87b-94ba3017f6a5"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1", "0"},
+     {"0", "1"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233604637957`*^9, 3.87552348296843*^9, 3.875524228879566*^9, {
+   3.8755246460232973`*^9, 3.875524678388699*^9}, 3.875525550721942*^9, 
+   3.875526128059669*^9, 3.875526182620129*^9, 3.875526474784895*^9, {
+   3.875526642497182*^9, 3.875526646781219*^9}, 3.875527159523068*^9, 
+   3.875530002728174*^9, 3.875706728373144*^9},
+ CellLabel->
+  "Out[38]//MatrixForm=",ExpressionUUID->"f7cb08b7-6486-4a70-b771-\
+d1a062ec2408"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Occupancy matrix at day 1", "Subsection",
+ CellChangeTimes->{
+  3.87552329278465*^9, {3.875524592784053*^9, 3.875524592863068*^9}, {
+   3.875526521109454*^9, 3.875526523591463*^9}, {3.875526611368705*^9, 
+   3.875526625255546*^9}, 3.8755266928433104`*^9, {3.875526765326119*^9, 
+   3.875526765431319*^9}, {3.875526832368144*^9, 
+   3.875526835033946*^9}},ExpressionUUID->"fa175a3e-fc50-4629-805a-\
+adc5c88cf1a2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M1", ":=", 
+   RowBox[{"M0", "+", "P"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"M1", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523184118668*^9, 3.8755231878826838`*^9}, {
+   3.875523359961742*^9, 3.8755233601628923`*^9}, 3.8755234807119207`*^9, {
+   3.875526627242174*^9, 3.875526646513768*^9}, {3.875526702193595*^9, 
+   3.875526768958579*^9}},
+ CellLabel->"In[39]:=",ExpressionUUID->"6796ea78-d3c6-44f0-93f8-303dfb635cd2"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"1.8`", "0.2`"},
+     {"0.5`", "1.5`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233604637957`*^9, 3.87552348296843*^9, 3.875524228879566*^9, {
+   3.8755246460232973`*^9, 3.875524678388699*^9}, 3.875525550721942*^9, 
+   3.875526128059669*^9, 3.875526182620129*^9, 3.875526474784895*^9, {
+   3.875526642497182*^9, 3.875526646781219*^9}, 3.875526724240202*^9, 
+   3.8755267692797747`*^9, 3.875526837246522*^9, 3.875527159534371*^9, 
+   3.8755300027448874`*^9, 3.875706728381505*^9},
+ CellLabel->
+  "Out[40]//MatrixForm=",ExpressionUUID->"707a9592-462f-48d0-a719-\
+85a3ec5e8a7e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Occupancy matrix at day 6", "Subsection",
+ CellChangeTimes->{
+  3.87552329278465*^9, {3.875524592784053*^9, 3.875524592863068*^9}, {
+   3.875526521109454*^9, 3.875526523591463*^9}, {3.875526611368705*^9, 
+   3.875526625255546*^9}, 3.8755266928433104`*^9, {3.875526765326119*^9, 
+   3.875526787456517*^9}, {3.875526854154662*^9, 3.875526854237925*^9}, {
+   3.8755268886732264`*^9, 
+   3.875526892190146*^9}},ExpressionUUID->"aacae1a6-918d-470c-874f-\
+5c2210f90520"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M7", ":=", 
+   RowBox[{"M0", "+", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "1"}], "]"}], "+", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "2"}], "]"}], "+", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "3"}], "]"}], "+", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "4"}], "]"}], "+", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "5"}], "]"}], "+", 
+    RowBox[{"MatrixPower", "[", 
+     RowBox[{"P", ",", "6"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"M7", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.875523184118668*^9, 3.8755231878826838`*^9}, {
+   3.875523359961742*^9, 3.8755233601628923`*^9}, 3.8755234807119207`*^9, {
+   3.875526627242174*^9, 3.875526646513768*^9}, {3.875526702193595*^9, 
+   3.8755268078169813`*^9}, 3.875526857894073*^9},
+ CellLabel->"In[41]:=",ExpressionUUID->"13e4c840-3e11-4941-9ec7-9a6fa69557f0"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"5.408074000000001`", "1.5919260000000002`"},
+     {"3.9798150000000008`", "3.020185`"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.8755233604637957`*^9, 3.87552348296843*^9, 3.875524228879566*^9, {
+   3.8755246460232973`*^9, 3.875524678388699*^9}, 3.875525550721942*^9, 
+   3.875526128059669*^9, 3.875526182620129*^9, 3.875526474784895*^9, {
+   3.875526642497182*^9, 3.875526646781219*^9}, 3.875526724240202*^9, 
+   3.8755267692797747`*^9, 3.8755268080422697`*^9, 3.875526859065639*^9, 
+   3.875526893893866*^9, 3.875527159556942*^9, 3.8755300027729473`*^9, 
+   3.875706728404642*^9},
+ CellLabel->
+  "Out[42]//MatrixForm=",ExpressionUUID->"cc5ee425-2535-4a67-b188-\
+2edfd82d20a8"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+On Monday it\[CloseCurlyQuote]s sunny. What\[CloseCurlyQuote]s the expected \
+number of cloudy days in a week?\
+\>", "Subsection",
+ CellChangeTimes->{{3.8755233102104263`*^9, 3.875523325371764*^9}, {
+  3.8755253335344477`*^9, 3.8755253342283297`*^9}, {3.875526921799739*^9, 
+  3.875526941227318*^9}},ExpressionUUID->"3816f356-4101-48b3-a9e8-\
+2174f786f1fc"],
+
+Cell["Matrix element M7(2,1) (from sunny to cloudy):", "Text",
+ CellChangeTimes->{{3.875525525191288*^9, 3.8755255259047213`*^9}, {
+  3.87552596821059*^9, 3.87552597414701*^9}, {3.875527069779373*^9, 
+  3.875527080966831*^9}},ExpressionUUID->"b28ee164-9cea-4e41-a151-\
+b1e8b8c0df62"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"M721", " ", ":=", " ", 
+    RowBox[{"M7", "[", 
+     RowBox[{"[", 
+      RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ";"}], 
+  " "}], "\[IndentingNewLine]", "M721"}], "Input",
+ CellChangeTimes->{{3.875523333481289*^9, 3.875523375100396*^9}, {
+   3.8755234352567387`*^9, 3.8755234367379208`*^9}, 3.875523481867544*^9, {
+   3.875525336860127*^9, 3.875525338281324*^9}, {3.875526150339213*^9, 
+   3.87552615053398*^9}, {3.87552709233202*^9, 3.875527106312544*^9}, {
+   3.87552999539937*^9, 3.8755299989337463`*^9}},
+ CellLabel->"In[43]:=",ExpressionUUID->"666f97e4-2294-44bb-9728-fe58f4e60eaa"],
+
+Cell[BoxData["3.9798150000000008`"], "Output",
+ CellChangeTimes->{
+  3.8755233758269663`*^9, 3.8755234370929327`*^9, 3.8755234846055183`*^9, 
+   3.8755238058180923`*^9, 3.875524228981031*^9, {3.8755246460621843`*^9, 
+   3.875524678433546*^9}, 3.875525338485428*^9, 3.8755255507713337`*^9, 
+   3.875526128148643*^9, 3.875526182655217*^9, 3.875526474828278*^9, 
+   3.875526901434978*^9, 3.8755271065907927`*^9, 3.875527159569469*^9, {
+   3.875529999249468*^9, 3.8755300027918377`*^9}, 3.875706728413672*^9},
+ CellLabel->"Out[44]=",ExpressionUUID->"cb76aab8-bb4b-4aed-841d-6151f04da14c"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 623},
+WindowMargins->{{Automatic, -924}, {Automatic, -74}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e35af1c6-f4fc-49c2-a606-8a23e6335944"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 586, 8, 67, "Section",ExpressionUUID->"e892b0ce-f73e-44bc-878f-3fc3611d8099"],
+Cell[CellGroupData[{
+Cell[1191, 34, 190, 4, 54, "Subsection",ExpressionUUID->"a40290f7-24df-4b24-8d49-d1fcf8eccc51"],
+Cell[CellGroupData[{
+Cell[1406, 42, 519, 13, 52, "Input",ExpressionUUID->"ce3affc1-0367-4af8-a79f-dfe99dab0f05"],
+Cell[1928, 57, 896, 23, 60, "Output",ExpressionUUID->"5462dfc4-5489-468e-ae12-e275c3244fd9"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2873, 86, 347, 6, 54, "Subsection",ExpressionUUID->"785a1b11-5c25-4b9d-bd72-540fd3c12021"],
+Cell[CellGroupData[{
+Cell[3245, 96, 560, 13, 52, "Input",ExpressionUUID->"5751cf16-2756-4c8c-b87b-94ba3017f6a5"],
+Cell[3808, 111, 932, 24, 60, "Output",ExpressionUUID->"f7cb08b7-6486-4a70-b771-d1a062ec2408"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4789, 141, 418, 7, 54, "Subsection",ExpressionUUID->"fa175a3e-fc50-4629-805a-adc5c88cf1a2"],
+Cell[CellGroupData[{
+Cell[5232, 152, 480, 9, 52, "Input",ExpressionUUID->"6796ea78-d3c6-44f0-93f8-303dfb635cd2"],
+Cell[5715, 163, 1018, 25, 60, "Output",ExpressionUUID->"707a9592-462f-48d0-a719-85a3ec5e8a7e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6782, 194, 470, 8, 54, "Subsection",ExpressionUUID->"aacae1a6-918d-470c-874f-5c2210f90520"],
+Cell[CellGroupData[{
+Cell[7277, 206, 950, 21, 73, "Input",ExpressionUUID->"13e4c840-3e11-4941-9ec7-9a6fa69557f0"],
+Cell[8230, 229, 1117, 26, 60, "Output",ExpressionUUID->"cc5ee425-2535-4a67-b188-2edfd82d20a8"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9396, 261, 367, 7, 54, "Subsection",ExpressionUUID->"3816f356-4101-48b3-a9e8-2174f786f1fc"],
+Cell[9766, 270, 283, 4, 35, "Text",ExpressionUUID->"b28ee164-9cea-4e41-a151-b1e8b8c0df62"],
+Cell[CellGroupData[{
+Cell[10074, 278, 636, 13, 52, "Input",ExpressionUUID->"666f97e4-2294-44bb-9728-fe58f4e60eaa"],
+Cell[10713, 293, 584, 8, 34, "Output",ExpressionUUID->"cb76aab8-bb4b-4aed-841d-6151f04da14c"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
